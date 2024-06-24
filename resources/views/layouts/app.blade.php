@@ -14,11 +14,15 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+        <link rel="shortcut icon" href="{{ asset('images/logo1.png') }}" type="image/png">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+
+
             {{-- @include('layouts.navigation') --}}
 
             <!-- Page Heading -->
