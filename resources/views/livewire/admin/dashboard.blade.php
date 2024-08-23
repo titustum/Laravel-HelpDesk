@@ -97,7 +97,7 @@ class extends Component {
                             {{ $problem->status }}
                         </span>
                     </td>
-                    <td class="px-4 py-2">{{ $problem->assigned_to ?? 'Unassigned' }}</td>
+                    <td class="px-4 py-2">{{ $problem->assignedOfficer->name ?? 'Unassigned' }}</td>
                     <td class="px-4 py-2">
                         <a href="{{ route('admin.problems.edit', $problem->id) }}" class="text-blue-500 hover:underline">Edit</a>
                     </td>

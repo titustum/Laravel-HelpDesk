@@ -10,7 +10,7 @@ class Problem extends Model
     use HasFactory;
 
     protected $fillable = ['client_name', 'client_phone', 'client_email', 'description',
-    'assigned_to', 'status', 'created_by'];
+    'assigned_to', 'status', 'created_by', 'solution'];
 
 
     public function assignedOfficer()

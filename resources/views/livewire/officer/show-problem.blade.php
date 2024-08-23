@@ -6,12 +6,10 @@ use App\Models\Problem;
 use App\Models\User;
 
 new
-#[Layout('layouts.admin-layout')]
+#[Layout('layouts.officer-layout')]
 class extends Component {
 
     public $problem;
-    public $officers;
-
     public $status;
     public $assigned_to;
     public $solution;
@@ -19,19 +17,18 @@ class extends Component {
     public function mount($id){
         $this->problem = Problem::findOrFail($id);
         $this->officers = User::where('role', 'officer')->get();
+        $this->solution = $this->problem->solution;
     }
 
     public function updateProblem()
     {
         $this->validate([
             'status' => 'required|in:Open,In Progress,Resolved,Closed',
-            'assigned_to' => 'nullable|exists:users,id',
-            'solution' => 'nullable|string',
+            'solution' => 'required|string',
         ]);
 
         $this->problem->update([
             'status' => $this->status,
-            'assigned_to' => $this->assigned_to,
             'solution' => $this->solution,
         ]);
 
@@ -98,19 +95,7 @@ class extends Component {
                         </select>
                     </dd>
                 </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                        Assigned To
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <select wire:model="assigned_to" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option value="">Unassigned</option>
-                            @foreach($officers as $officer)
-                                <option value="{{ $officer->id }}">{{ $officer->name }}</option>
-                            @endforeach
-                        </select>
-                    </dd>
-                </div>
+
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Solution

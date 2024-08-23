@@ -84,7 +84,6 @@
         </div>
     </div>
 
-    @livewireScripts
 
 </x-overall-layout>
 

@@ -11,17 +11,32 @@ class extends Component {
 
     public $search;
     public $problems;
+    public $flashMessage = '';
 
     public function mount()
     {
         $this->search = '';
         $this->problems = Problem::get();
     }
+
+    public function deleteProblem($id){
+        $problem = Problem::findOrFail($id);
+        $problem->delete();
+        $this->problems = Problem::get();
+
+        session()->flash('message', 'Problem successfully deleted.');
+    }
 }
 ?>
 
 <div>
     <h2 class="text-2xl font-semibold mb-4">Problems</h2>
+
+    @if (session()->has('message'))
+    <div class="text-green-600 mb-4 bg-green-200 rounded-md p-3">
+        {{ $flashMessage }}
+    </div>
+    @endif
 
     <div class="mb-4 flex justify-between items-center">
         <div>
@@ -72,7 +87,10 @@ class extends Component {
                     <td class="py-2 px-4 border-b border-gray-200">
                         <a href="{{ route('admin.problems.show', $problem->id) }}" class="text-blue-600 hover:text-blue-900 mr-2">View</a>
                         <a href="{{ route('admin.problems.edit', $problem->id) }}" class="text-green-600 hover:text-green-900 mr-2">Edit</a>
-                        <button wire:click="delete({{ $problem->id }})" class="text-red-600 hover:text-red-900">Delete</button>
+                        <button
+                            wire:click="deleteProblem({{ $problem->id }})"
+                            wire:confirm="Are you sure you want to delete this problem?"
+                        class="text-red-600 hover:text-red-900">Delete</button>
                     </td>
                 </tr>
             @endforeach
