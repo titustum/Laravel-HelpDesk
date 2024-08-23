@@ -15,7 +15,10 @@
 
         <link rel="shortcut icon" href="{{ asset('images/logo1.png') }}" type="image/png">
         <!-- Styles -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+        <link rel="stylesheet" href="{{ asset('build/assets/app-D1-nV2Ph.css') }}">
+        <script src="{{ asset('build/assets/app-SOzcb3O0.js') }}" defer></script>
     </head>
     <body class="antialiased font-sans">
 
