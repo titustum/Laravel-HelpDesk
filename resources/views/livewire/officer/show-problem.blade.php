@@ -23,7 +23,7 @@ class extends Component {
     public function updateProblem()
     {
         $this->validate([
-            'status' => 'required|in:Open,In Progress,Resolved,Closed',
+            'status' => 'required|in:Open,In Progress,Resolved,Elevated,Closed',
             'solution' => 'required|string',
         ]);
 
@@ -91,6 +91,7 @@ class extends Component {
                             <option value="Open">Open</option>
                             <option value="In Progress">In Progress</option>
                             <option value="Resolved">Resolved</option>
+                            <option value="Elevate">Elevate</option>
                             <option value="Closed">Closed</option>
                         </select>
                     </dd>
