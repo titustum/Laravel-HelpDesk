@@ -17,16 +17,16 @@ return new class extends Migration
             $table->string('client_phone')->nullable();
             $table->string('client_email')->nullable();
             $table->text('description');
-            $table->enum('status', ['Open', 'In Progress', 'Resolved', 'Closed'])->default('Open');
+            $table->enum('status', ['Open', 'In Progress', 'Resolved', 'Elevated', 'Closed'])->default('Open');
             $table->unsignedBigInteger('assigned_to')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->text('solution')->nullable();
             $table->timestamp('resolved_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

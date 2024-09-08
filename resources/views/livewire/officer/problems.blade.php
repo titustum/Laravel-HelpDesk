@@ -44,7 +44,7 @@ class extends Component {
             <thead>
                 <tr class="bg-gray-50 text-left">
                     <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                    <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Problem</th>
+                    {{-- <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Problem</th> --}}
                     <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
                     <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -55,7 +55,7 @@ class extends Component {
                 @foreach (Auth::user()->problems as $problem)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#{{ $problem->id }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $problem->description }}</td>
+                    {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $problem->description }}</td> --}}
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $problem->client_name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full

@@ -12,9 +12,6 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public string $name = '';
     public string $email = '';
-    public string $department_id = '';
-    public string $designation = '';
-    public string $extension_number = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -26,6 +23,7 @@ new #[Layout('layouts.guest')] class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'role' => ['required', 'string', 'in:client,officer,admin,superadmin'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -84,6 +82,20 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block w-full mt-1" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- User role -->
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Your Role')" />
+            <select wire:model="role" id="role" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600" type="text" name="role" required>
+                <option value="">Choose..</option>
+                <option value="client">Client</option>
+                <option value="officer">Officer</option>
+                <option value="admin">Admin</option>
+                <option value="superadmin">Superadmin</option>
+
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
         <!-- Password -->
