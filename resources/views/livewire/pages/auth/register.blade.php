@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,8 +13,17 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public string $name = '';
     public string $email = '';
+    public string $role = '';
+    public string $designation = '';
+    public string $department_id = '';
+    public string $extension_number = '';
+    public string $office_number = '';
     public string $password = '';
-    public string $password_confirmation = '';
+    public $departments = [];
+
+    public function mount(){
+        $this->departments = Department::all();
+    }
 
     /**
      * Handle an incoming registration request.
@@ -22,10 +32,16 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
+            'designation' => ['required', 'string', 'max:255'],
+            'department_id' => ['required', 'numeric'],
+            'extension_number' => ['required', 'string', 'max:255'],
+            'office_number' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'role' => ['required', 'string', 'in:client,officer,admin,superadmin'],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'string', Rules\Password::defaults()],
         ]);
+
+
 
         $validated['password'] = Hash::make($validated['password']);
 
@@ -55,13 +71,20 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="department_id" :value="__('Department')" />
             <select wire:model="department_id" id="department_id" class="w-full mt-1 border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600" type="text" name="department_id" required>
                 <option value="">Choose...</option>
-                <option value="1">Finance Department</option>
-                <option value="2">Agriculture Department</option>
-                <option value="3">Technical Department</option>
-                <option value="4">ICT Department</option>
+                @foreach($departments as $department)
+                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                @endforeach
             </select>
             <x-input-error :messages="$errors->get('department_id')" class="mt-2" />
         </div>
+
+        <!-- Ext. No -->
+        <div class="mt-4">
+            <x-input-label for="office_number" :value="__('Office Number')" />
+            <x-text-input wire:model="office_number" id="office_number" class="block w-full mt-1" type="text" name="office_number" required/>
+            <x-input-error :messages="$errors->get('office_number')" class="mt-2" />
+        </div>
+
 
         <!-- Designation -->
         <div class="mt-4">
@@ -108,17 +131,6 @@ new #[Layout('layouts.guest')] class extends Component
                             required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block w-full mt-1"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

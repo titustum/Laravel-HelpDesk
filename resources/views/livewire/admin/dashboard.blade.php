@@ -28,50 +28,50 @@ class extends Component {
 };
 ?>
 
-<section class="bg-gray-100 p-6">
-    <h2 class="text-2xl font-bold mb-4">Admin Dashboard</h2>
+<section class="p-6 bg-gray-100">
+    <h2 class="mb-4 text-2xl font-bold">Admin Dashboard</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <!-- Total Problems Card -->
-        <div class="bg-white p-4 rounded-lg shadow">
+        <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
                 <h3 class="text-lg font-semibold">Total Problems</h3>
-                <i class="fas fa-clipboard-list text-blue-500 text-2xl"></i>
+                <i class="text-2xl text-blue-500 fas fa-clipboard-list"></i>
             </div>
-            <p class="text-3xl font-bold mt-2">{{ $totalProblems }}</p>
+            <p class="mt-2 text-3xl font-bold">{{ $totalProblems }}</p>
         </div>
 
         <!-- Assigned Problems Card -->
-        <div class="bg-white p-4 rounded-lg shadow">
+        <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
                 <h3 class="text-lg font-semibold">Assigned Problems</h3>
-                <i class="fas fa-tasks text-green-500 text-2xl"></i>
+                <i class="text-2xl text-green-500 fas fa-tasks"></i>
             </div>
-            <p class="text-3xl font-bold mt-2">{{ $assignedProblems }}</p>
+            <p class="mt-2 text-3xl font-bold">{{ $assignedProblems }}</p>
         </div>
 
         <!-- Unassigned Problems Card -->
-        <div class="bg-white p-4 rounded-lg shadow">
+        <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
                 <h3 class="text-lg font-semibold">Unassigned Problems</h3>
-                <i class="fas fa-exclamation-circle text-red-500 text-2xl"></i>
+                <i class="text-2xl text-red-500 fas fa-exclamation-circle"></i>
             </div>
-            <p class="text-3xl font-bold mt-2">{{ $unassignedProblems }}</p>
+            <p class="mt-2 text-3xl font-bold">{{ $unassignedProblems }}</p>
         </div>
 
         <!-- Total Officers Card -->
-        <div class="bg-white p-4 rounded-lg shadow">
+        <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
                 <h3 class="text-lg font-semibold">Total Officers</h3>
-                <i class="fas fa-users text-purple-500 text-2xl"></i>
+                <i class="text-2xl text-purple-500 fas fa-users"></i>
             </div>
-            <p class="text-3xl font-bold mt-2">{{ $totalOfficers }}</p>
+            <p class="mt-2 text-3xl font-bold">{{ $totalOfficers }}</p>
         </div>
     </div>
 
     <!-- Recent Problems Table -->
-    <div class="mt-8 bg-white rounded-lg shadow overflow-hidden">
-        <h3 class="text-lg font-semibold p-4 bg-gray-200">Recent Problems</h3>
+    <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
+        <h3 class="p-4 text-lg font-semibold bg-gray-200">Recent Problems</h3>
         <table class="w-full">
             <thead>
                 <tr class="bg-gray-100">
@@ -99,7 +99,7 @@ class extends Component {
                     </td>
                     <td class="px-4 py-2">{{ $problem->assignedOfficer->name ?? 'Unassigned' }}</td>
                     <td class="px-4 py-2">
-                        <a href="{{ route('admin.problems.edit', $problem->id) }}" class="text-blue-500 hover:underline">Edit</a>
+                        <a href="{{ route('admin.problems.show', $problem->id) }}" class="text-blue-500 hover:underline">View</a>
                     </td>
                 </tr>
                 @endforeach

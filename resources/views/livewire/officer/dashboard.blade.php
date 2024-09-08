@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Problem;
 
 new
-#[Layout('layouts.officer-layout')]
+#[Layout('layouts.admin-layout')]
 class extends Component  {
     public $user;
     public $resolved_count;
@@ -19,67 +19,67 @@ class extends Component  {
 
 }; ?>
 
-<section class="bg-gray-100 p-6">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Officer Dashboard</h2>
+<section class="p-6 bg-gray-100">
+    <h2 class="mb-6 text-2xl font-semibold text-gray-800">Officer Dashboard</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- Assigned Problems Card -->
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-700">Assigned Problems</h3>
-                <i class="fas fa-tasks text-blue-500 text-2xl"></i>
+                <i class="text-2xl text-blue-500 fas fa-tasks"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problems->count() }}</p>
-            <p class="text-sm text-gray-600 mt-2">Current assigned issues</p>
+            <p class="mt-2 text-sm text-gray-600">Current assigned issues</p>
         </div>
 
         <!-- Resolved Problems Card -->
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-700">Resolved Problems</h3>
-                <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+                <i class="text-2xl text-green-500 fas fa-check-circle"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problems->where('status', 'Resolved')->count() }}</p>
-            <p class="text-sm text-gray-600 mt-2">Issues resolved this month</p>
+            <p class="mt-2 text-sm text-gray-600">Issues resolved this month</p>
         </div>
 
         <!-- Pending Problems Card -->
-        <div class="bg-white rounded-lg shadow p-6">
+        <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-700">Pending Problems</h3>
-                <i class="fas fa-clock text-yellow-500 text-2xl"></i>
+                <i class="text-2xl text-yellow-500 fas fa-clock"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{
                 Auth::user()->problems
                 ->where('status', 'Open')
                 ->count()
             }}</p>
-            <p class="text-sm text-gray-600 mt-2">Issues awaiting resolution</p>
+            <p class="mt-2 text-sm text-gray-600">Issues awaiting resolution</p>
         </div>
     </div>
 
     <!-- Recent Assigned Problems Table -->
-    <div class="mt-8 bg-white rounded-lg shadow overflow-hidden">
+    <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
         <div class="px-6 py-4 border-b border-gray-200">
             <h3 class="text-lg font-semibold text-gray-700">Recent Assigned Problems</h3>
         </div>
         <table class="w-full">
             <thead>
-                <tr class="bg-gray-50 text-left">
-                    <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                    <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Problem</th>
-                    <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                    <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                <tr class="text-left bg-gray-50">
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase">ID</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase">Problem</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase">Client</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase">Status</th>
+                    <th class="px-6 py-3 text-xs font-medium tracking-wider text-gray-500 uppercase">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
                 <!-- Sample row, repeat as needed -->
                 @foreach (Auth::user()->problems as $problem)
                 <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">#{{ $problem->id }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $problem->description }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $problem->client_name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">#{{ $problem->id }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->description }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->client_name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                             @if($problem->status === 'Open') bg-red-100 text-red-800
@@ -89,7 +89,7 @@ class extends Component  {
                             {{ $problem->status }}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
                         <a href="{{ route('officer.problems.show', $problem->id) }}" class="text-indigo-600 hover:text-indigo-900">Update</a>
                     </td>
                 </tr>

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -26,9 +27,13 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'department_id' => Department::inRandomOrder()->first()->id,
+            'designation' => fake()->word(),
+            'office_number' => random_int(100, 999),
+            'extension_number' => random_int(100000, 9999999),
             'role' => fake()->randomElement(['client','officer','admin','superadmin']),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }

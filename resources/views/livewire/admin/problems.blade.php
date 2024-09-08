@@ -3,48 +3,62 @@
 use Livewire\Volt\Component;
 use Livewire\Attributes\Layout;
 use App\Models\Problem;
-use App\Models\User;
+use Livewire\WithPagination;
 
 new
 #[Layout('layouts.admin-layout')]
-class extends Component {
+class extends Component
+{
+    use WithPagination;
 
     public $search;
-    public $problems;
     public $flashMessage = '';
 
-    public function mount()
-    {
-        $this->search = '';
-        $this->problems = Problem::get();
-    }
+    protected $paginationTheme = 'tailwind'; // Optional, depends on your styling
 
-    public function deleteProblem($id){
+    public function deleteProblem($id)
+    {
         $problem = Problem::findOrFail($id);
         $problem->delete();
-        $this->problems = Problem::get();
 
         session()->flash('message', 'Problem successfully deleted.');
+    }
+
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Resets to page 1 when search query changes
+    }
+
+    public function with()
+    {
+        $problems = Problem::where('title', 'like', '%' . $this->search . '%')
+            ->orWhere('description', 'like', '%' . $this->search . '%')
+            ->paginate(20); // Pagination added, adjust the number as necessary
+
+        return [
+            "problems" => $problems,
+        ];
     }
 }
 ?>
 
+
 <div>
-    <h2 class="text-2xl font-semibold mb-4">Problems</h2>
+    <h2 class="mb-4 text-2xl font-semibold">Problems</h2>
 
     @if (session()->has('message'))
-    <div class="text-green-600 mb-4 bg-green-200 rounded-md p-3">
+    <div class="p-3 mb-4 text-green-600 bg-green-200 rounded-md">
         {{ $flashMessage }}
     </div>
     @endif
 
-    <div class="mb-4 flex justify-between items-center">
+    <div class="flex items-center justify-between mb-4">
         <div>
             <input wire:model.debounce.300ms="search" type="text" placeholder="Search problems..."
                    class="px-4 py-2 border rounded-lg">
         </div>
         <a href="{{ route('admin.problems.create') }}"
-           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+           class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
             Add New Problem
         </a>
     </div>
@@ -52,19 +66,19 @@ class extends Component {
     <table class="min-w-full bg-white">
         <thead>
             <tr>
-                <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                     ID
                 </th>
-                <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                     Client Name
                 </th>
-                <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                     Status
                 </th>
-                <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                     Created At
                 </th>
-                <th class="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
                     Actions
                 </th>
             </tr>
@@ -72,9 +86,9 @@ class extends Component {
         <tbody>
             @foreach ($problems as $problem)
                 <tr>
-                    <td class="py-2 px-4 border-b border-gray-200">{{ $problem->id }}</td>
-                    <td class="py-2 px-4 border-b border-gray-200">{{ $problem->client_name }}</td>
-                    <td class="py-2 px-4 border-b border-gray-200">
+                    <td class="px-4 py-2 border-b border-gray-200">{{ $problem->id }}</td>
+                    <td class="px-4 py-2 border-b border-gray-200">{{ $problem->client_name }}</td>
+                    <td class="px-4 py-2 border-b border-gray-200">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                             @if($problem->status === 'Open') bg-red-100 text-red-800
                             @elseif($problem->status === 'In Progress') bg-yellow-100 text-yellow-800
@@ -83,10 +97,10 @@ class extends Component {
                             {{ $problem->status }}
                         </span>
                     </td>
-                    <td class="py-2 px-4 border-b border-gray-200">{{ $problem->created_at->format('Y-m-d H:i') }}</td>
-                    <td class="py-2 px-4 border-b border-gray-200">
-                        <a href="{{ route('admin.problems.show', $problem->id) }}" class="text-blue-600 hover:text-blue-900 mr-2">View</a>
-                        <a href="{{ route('admin.problems.edit', $problem->id) }}" class="text-green-600 hover:text-green-900 mr-2">Edit</a>
+                    <td class="px-4 py-2 border-b border-gray-200">{{ $problem->created_at->format('Y-m-d H:i') }}</td>
+                    <td class="px-4 py-2 border-b border-gray-200">
+                        <a href="{{ route('admin.problems.show', $problem->id) }}" class="mr-2 text-blue-600 hover:text-blue-900">View</a>
+                        <a href="{{ route('admin.problems.edit', $problem->id) }}" class="mr-2 text-green-600 hover:text-green-900">Edit</a>
                         <button
                             wire:click="deleteProblem({{ $problem->id }})"
                             wire:confirm="Are you sure you want to delete this problem?"
@@ -96,5 +110,9 @@ class extends Component {
             @endforeach
         </tbody>
     </table>
+
+    <div class="mt-4">
+        {{ $problems->links() }}
+    </div>
 </div>
 

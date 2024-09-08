@@ -20,7 +20,7 @@ Route::view('profile', 'profile')
 
 
 //officer
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:officer'])->group(function () {
     Volt::route('dashboard', 'officer.dashboard')->name('dashboard');
     Volt::route('officer/dashboard', 'officer.dashboard')->name('officer.dashboard');
     Volt::route('officer/problems', 'officer.problems')->name('officer.problems');
@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //admin
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     Volt::route('admin/dashboard', 'admin.dashboard')->name('admin.dashboard');
     Volt::route('admin/problem/create', 'admin.create-problem')->name('admin.problems.create');
 
