@@ -12,12 +12,18 @@ class ProblemFactory extends Factory
 {
     protected $model = Problem::class;
 
+
+    private function generateTicket()
+    {
+        return 'TICKET-' . Str::upper(Str::random(8)) . '-' . rand(1000, 9999);
+    }
+
     public function definition()
     {
         $client = User::where('role', 'client')->inRandomOrder()->first();
 
         return [
-            'ticket' => $this->faker->unique()->word(),
+            'ticket' => $this->generateTicket(),
             'description' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement(['open', 'resolved', 'elevated', 'closed']),
             'assigned_to' => User::inRandomOrder()->where('role','officer')->first()->id,

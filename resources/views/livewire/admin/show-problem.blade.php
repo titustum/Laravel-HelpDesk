@@ -53,7 +53,7 @@ class extends Component {
     <div class="overflow-hidden bg-white shadow sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Problem #{{ $problem->id }}
+                Problem : {{ $problem->ticket }}
             </h3>
             <p class="max-w-2xl mt-1 text-sm text-gray-500">
                 Created on {{ $problem->created_at->format('F j, Y, g:i a') }}
