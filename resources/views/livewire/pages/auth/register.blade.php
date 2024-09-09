@@ -51,8 +51,12 @@ new #[Layout('layouts.guest')] class extends Component
 
         if (Auth::user()->role == 'admin') {
             $this->redirect(route('admin.dashboard'));
-        }else{
-            $this->redirect(route('dashboard'));
+        }
+        elseif (Auth::user()->role == 'officer') {
+            $this->redirect(route('officer.dashboard'));
+        }
+        else{
+            $this->redirect(route('client.dashboard'));
         }
     }
 }; ?>

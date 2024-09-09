@@ -10,12 +10,12 @@
                 @if (Auth::user()->role === 'client')
 
                 <li class="mb-2">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
+                    <a href="{{ route('client.dashboard') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
                         <i class="mr-3 fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 </li>
                 <li class="mb-2">
-                    <a href="{{ route('admin.problems.index') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
+                    <a href="{{ route('client.problems') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
                         <i class="mr-3 fas fa-clipboard-list"></i> Problems
                     </a>
                 </li>

@@ -75,9 +75,9 @@ class extends Component {
         <table class="w-full">
             <thead>
                 <tr class="bg-gray-100">
-                    <th class="px-4 py-2 text-left">ID</th>
+                    <th class="px-4 py-2 text-left">Ticket</th>
                     <th class="px-4 py-2 text-left">Client</th>
-                    <th class="px-4 py-2 text-left">Problem</th>
+                    <th class="px-4 py-2 text-left">Department</th>
                     <th class="px-4 py-2 text-left">Status</th>
                     <th class="px-4 py-2 text-left">Assigned To</th>
                     <th class="px-4 py-2 text-left">Actions</th>
@@ -86,14 +86,15 @@ class extends Component {
             <tbody>
                 @foreach($recentProblems as $problem)
                 <tr class="border-t">
-                    <td class="px-4 py-2">{{ $problem->id }}</td>
-                    <td class="px-4 py-2">{{ $problem->client_name }}</td>
-                    <td class="px-4 py-2">{{ Str::limit($problem->description, 30) }}</td>
-                    <td class="px-4 py-2">
-                        <span class="px-2 py-1 rounded-full text-xs
-                            @if($problem->status == 'Open') bg-red-200 text-red-800
-                            @elseif($problem->status == 'In Progress') bg-yellow-200 text-yellow-800
-                            @else bg-green-200 text-green-800 @endif">
+                    <td class="px-4 py-2">{{ $problem->ticket }}</td>
+                    <td class="px-4 py-2">{{ $problem->clientReported->name }}</td>
+                    <td class="px-4 py-2">{{ $problem->clientReported->department->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                            @if($problem->status === 'open') bg-red-100 text-red-800
+                            @elseif($problem->status === 'elevated') bg-yellow-100 text-yellow-800
+                            @elseif($problem->status === 'resolved') bg-green-100 text-green-800
+                            @else bg-gray-100 text-gray-800 @endif">
                             {{ $problem->status }}
                         </span>
                     </td>

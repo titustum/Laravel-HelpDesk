@@ -68,4 +68,12 @@ class User extends Authenticatable
     public function problems(){
         return $this->hasMany(Problem::class, 'assigned_to', 'id');
     }
+
+    public function problemsReported(){
+        return $this->hasMany(Problem::class, 'created_by', 'id');
+    }
+
+    public function department(){
+        return $this->belongsTo(Department::class, 'department_id', 'id');
+    }
 }

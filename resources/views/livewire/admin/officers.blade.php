@@ -17,8 +17,8 @@ class extends Component  {
 
 }; ?>
 
-<div>
-    <h2 class="mb-4 text-2xl font-semibold">Problems</h2>
+<div class="p-4 mt-8 overflow-hidden bg-white rounded-lg shadow">
+    <h2 class="mb-4 text-2xl font-semibold">Officers</h2>
 
     @if (session()->has('message'))
     <div class="p-3 mb-4 text-green-600 bg-green-200 rounded-md">
@@ -64,7 +64,7 @@ class extends Component  {
                     <td class="px-4 py-2 border-b border-gray-200">{{ $officer->name }}</td>
                     <td class="px-4 py-2 border-b border-gray-200">{{ $officer->email }}</td>
                     <td class="px-4 py-2 border-b border-gray-200">{{ $officer->role }}</td>
-                    <td class="px-4 py-2 border-b border-gray-200"></td>
+                    <td class="px-4 py-2 text-blue-400 border-b border-gray-200">View</td>
                 </tr>
             @endforeach
         </tbody>

@@ -70,6 +70,10 @@ Ensure you have the following installed:
    ```bash
    php artisan migrate
    ```
+   Seed the database
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
 7. **Install Tailwind CSS**:
    ```bash

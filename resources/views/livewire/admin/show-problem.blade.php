@@ -11,20 +11,20 @@ class extends Component {
 
     public $problem;
     public $officers;
-
     public $status;
     public $assigned_to;
     public $solution;
 
     public function mount($id){
         $this->problem = Problem::findOrFail($id);
+        $this->assigned_to = $this->problem->assigned_to;
         $this->officers = User::where('role', 'officer')->get();
     }
 
     public function updateProblem()
     {
         $this->validate([
-            'status' => 'required|in:Open,In Progress,Resolved,Closed',
+            'status' => 'required|in:open,elevate,resolved,closed',
             'assigned_to' => 'nullable|exists:users,id',
             'solution' => 'nullable|string',
         ]);
@@ -66,7 +66,31 @@ class extends Component {
                         Client Name
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $problem->client_name }}
+                        {{ $problem->clientReported->name }}
+                    </dd>
+                </div>
+                <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Client Department
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ $problem->clientReported->department->name }}
+                    </dd>
+                </div>
+                <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Office Number
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ $problem->clientReported->office_number }}
+                    </dd>
+                </div>
+                <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                        Client Designation
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ $problem->clientReported->designation }}
                     </dd>
                 </div>
                 <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -74,7 +98,7 @@ class extends Component {
                         Client Contact
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $problem->client_phone }} / {{ $problem->client_email }}
+                        {{ $problem->clientReported->email }}
                     </dd>
                 </div>
                 <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -91,11 +115,9 @@ class extends Component {
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         <select wire:model="status" class="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <option value="Open">Open</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Resolved">Resolved</option>
-                            <option value="Elevate">Elevate</option>
-                            <option value="Closed">Closed</option>
+                            <option value="open">Open</option>
+                            <option value="resolved">Resolved</option>
+                            <option value="closed">Closed</option>
                         </select>
                     </dd>
                 </div>

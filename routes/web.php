@@ -14,14 +14,20 @@ Route::view('/', 'welcome');
 
 
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
 
+
+
+//client
+Route::middleware(['auth', 'role:client'])->group(function () {
+    Volt::route('dashboard', 'client.dashboard')->name('client.dashboard');
+    Volt::route('client/dashboard', 'client.dashboard')->name('client.dashboard');
+    Volt::route('client/problems', 'client.problems')->name('client.problems');
+    Volt::route('client/problems/{id}', 'client.show-problem')->name('client.problems.show');
+});
 
 //officer
 Route::middleware(['auth', 'role:officer'])->group(function () {
-    Volt::route('dashboard', 'officer.dashboard')->name('dashboard');
+    Volt::route('dashboard', 'officer.dashboard')->name('officer.dashboard');
     Volt::route('officer/dashboard', 'officer.dashboard')->name('officer.dashboard');
     Volt::route('officer/problems', 'officer.problems')->name('officer.problems');
     Volt::route('officer/problems/{id}', 'officer.show-problem')->name('officer.problems.show');
@@ -39,11 +45,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Volt::route('admin/officers', 'admin.officers')->name('admin.officers.index');
     Volt::route('admin/reports', 'admin.reports')->name('admin.reports');
 
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
 
 });
 
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('logout');
+    Route::view('profile', 'profile')->name('profile');
+});
 
 
 

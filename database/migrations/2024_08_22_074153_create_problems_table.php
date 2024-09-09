@@ -13,20 +13,15 @@ return new class extends Migration
     {
         Schema::create('problems', function (Blueprint $table) {
             $table->id();
-            $table->string('client_name');
-            $table->string('client_phone')->nullable();
-            $table->string('client_email')->nullable();
+            $table->string('ticket')->unique();
             $table->text('description');
-            $table->enum('status', ['Open', 'In Progress', 'Resolved', 'Elevated', 'Closed'])->default('Open');
-            $table->unsignedBigInteger('assigned_to')->nullable();
-            $table->unsignedBigInteger('created_by');
+            $table->enum('status', ['open', 'resolved', 'elevated', 'closed'])->default('open');
+            $table->foreignId('assigned_to')->constrained('users')->nullable()->onDelete('set null');;
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');;
             $table->text('solution')->nullable();
             $table->timestamp('resolved_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-
         });
     }
 

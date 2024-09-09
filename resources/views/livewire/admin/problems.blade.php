@@ -33,7 +33,7 @@ class extends Component
     {
         $problems = Problem::where('title', 'like', '%' . $this->search . '%')
             ->orWhere('description', 'like', '%' . $this->search . '%')
-            ->paginate(20); // Pagination added, adjust the number as necessary
+            ->paginate(15); // Pagination added, adjust the number as necessary
 
         return [
             "problems" => $problems,
@@ -43,7 +43,8 @@ class extends Component
 ?>
 
 
-<div>
+<div class="p-4 mt-8 overflow-hidden bg-white rounded-lg shadow">
+
     <h2 class="mb-4 text-2xl font-semibold">Problems</h2>
 
     @if (session()->has('message'))
@@ -54,7 +55,7 @@ class extends Component
 
     <div class="flex items-center justify-between mb-4">
         <div>
-            <input wire:model.debounce.300ms="search" type="text" placeholder="Search problems..."
+            <input wire:live="search" type="text" placeholder="Search problems..."
                    class="px-4 py-2 border rounded-lg">
         </div>
         <a href="{{ route('admin.problems.create') }}"
@@ -63,50 +64,37 @@ class extends Component
         </a>
     </div>
 
-    <table class="min-w-full bg-white">
+    <table class="w-full">
         <thead>
-            <tr>
-                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                    ID
-                </th>
-                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                    Client Name
-                </th>
-                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                    Status
-                </th>
-                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                    Created At
-                </th>
-                <th class="px-4 py-2 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-100 border-b border-gray-200">
-                    Actions
-                </th>
+            <tr class="bg-gray-100">
+                <th class="px-4 py-2 text-left">Ticket</th>
+                <th class="px-4 py-2 text-left">Client</th>
+                <th class="px-4 py-2 text-left">Department</th>
+                <th class="px-4 py-2 text-left">Status</th>
+                <th class="px-4 py-2 text-left">Assigned To</th>
+                <th class="px-4 py-2 text-left">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($problems as $problem)
-                <tr>
-                    <td class="px-4 py-2 border-b border-gray-200">{{ $problem->id }}</td>
-                    <td class="px-4 py-2 border-b border-gray-200">{{ $problem->client_name }}</td>
-                    <td class="px-4 py-2 border-b border-gray-200">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                            @if($problem->status === 'Open') bg-red-100 text-red-800
-                            @elseif($problem->status === 'In Progress') bg-yellow-100 text-yellow-800
-                            @elseif($problem->status === 'Resolved') bg-green-100 text-green-800
-                            @else bg-gray-100 text-gray-800 @endif">
-                            {{ $problem->status }}
-                        </span>
-                    </td>
-                    <td class="px-4 py-2 border-b border-gray-200">{{ $problem->created_at->format('Y-m-d H:i') }}</td>
-                    <td class="px-4 py-2 border-b border-gray-200">
-                        <a href="{{ route('admin.problems.show', $problem->id) }}" class="mr-2 text-blue-600 hover:text-blue-900">View</a>
-                        <a href="{{ route('admin.problems.edit', $problem->id) }}" class="mr-2 text-green-600 hover:text-green-900">Edit</a>
-                        <button
-                            wire:click="deleteProblem({{ $problem->id }})"
-                            wire:confirm="Are you sure you want to delete this problem?"
-                        class="text-red-600 hover:text-red-900">Delete</button>
-                    </td>
-                </tr>
+            @foreach($problems as $problem)
+            <tr class="border-t">
+                <td class="px-4 py-2">{{ $problem->ticket }}</td>
+                <td class="px-4 py-2">{{ $problem->clientReported->name }}</td>
+                <td class="px-4 py-2">{{ $problem->clientReported->department->name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
+                        @if($problem->status === 'open') bg-red-100 text-red-800
+                        @elseif($problem->status === 'elevated') bg-yellow-100 text-yellow-800
+                        @elseif($problem->status === 'resolved') bg-green-100 text-green-800
+                        @else bg-gray-100 text-gray-800 @endif">
+                        {{ $problem->status }}
+                    </span>
+                </td>
+                <td class="px-4 py-2">{{ $problem->assignedOfficer->name ?? 'Unassigned' }}</td>
+                <td class="px-4 py-2">
+                    <a href="{{ route('admin.problems.show', $problem->id) }}" class="text-blue-500 hover:underline">View</a>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>

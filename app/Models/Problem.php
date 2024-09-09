@@ -9,12 +9,16 @@ class Problem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_name', 'client_phone', 'client_email', 'description',
-    'assigned_to', 'status', 'created_by', 'solution'];
+    protected $fillable = ['ticket','description','assigned_to', 'status', 'resolved_at', 'created_by', 'solution'];
 
 
     public function assignedOfficer()
     {
         return $this->belongsTo(User::class, 'assigned_to', 'id');
+    }
+
+    public function clientReported()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 }

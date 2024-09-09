@@ -17,18 +17,13 @@ class ProblemFactory extends Factory
         $client = User::where('role', 'client')->inRandomOrder()->first();
 
         return [
-            'client_name' => $this->faker->name,
-            'client_phone' => $this->faker->phoneNumber,
-            'client_email' => $this->faker->safeEmail,
-            'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['Open', 'In Progress', 'Resolved', 'Closed']),
-            'assigned_to' => null,
-            'created_by' => $client->id, // same as above
-            'solution' => $this->faker->optional()->paragraph,
-            'resolved_at' => $this->faker->optional()->dateTime,
-            'created_at' => now(),
-            'updated_at' => now(),
-            'deleted_at' => $this->faker->optional()->dateTime, // for soft deletes
+            'ticket' => $this->faker->unique()->word(),
+            'description' => $this->faker->paragraph(),
+            'status' => $this->faker->randomElement(['open', 'resolved', 'elevated', 'closed']),
+            'assigned_to' => User::inRandomOrder()->where('role','officer')->first()->id,
+            'created_by' => User::inRandomOrder()->where('role','client')->first()->id,
+            'solution' => $this->faker->optional()->paragraph(),
+            'resolved_at' => $this->faker->optional()->dateTime(),
         ];
     }
 }
