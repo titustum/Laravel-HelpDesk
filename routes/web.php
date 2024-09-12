@@ -3,6 +3,7 @@
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Models\User;
 
 Route::view('/', 'welcome');
 
@@ -11,8 +12,9 @@ Route::view('/', 'welcome');
 //     ->name('dashboard');
 
 
-
-
+Route::get('users', function(){
+    return User::select(['name', 'email', 'role'])->inRandomOrder()->limit(6)->get();
+})->name('users');
 
 
 
@@ -22,6 +24,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Volt::route('dashboard', 'client.dashboard')->name('client.dashboard');
     Volt::route('client/dashboard', 'client.dashboard')->name('client.dashboard');
     Volt::route('client/problems', 'client.problems')->name('client.problems');
+    Volt::route('client/problem/create', 'client.create-problem')->name('client.problems.create');
     Volt::route('client/problems/{id}', 'client.show-problem')->name('client.problems.show');
 });
 

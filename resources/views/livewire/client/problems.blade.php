@@ -37,8 +37,12 @@ class extends Component {
     @endif
 
     <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
-        <div class="px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
             <h3 class="text-lg font-semibold text-gray-700">Problems You Reported</h3>
+            <a href="{{ route('client.problems.create') }}"
+            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                Add New Problem
+            </a>
         </div>
         <table class="w-full">
             <thead>
