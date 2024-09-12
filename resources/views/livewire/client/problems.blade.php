@@ -60,7 +60,7 @@ class extends Component {
                 <tr>
                     <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">#{{ $problem->ticket }}</td>
                     {{-- <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->description }}</td> --}}
-                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->assignedOfficer->name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->assignedOfficer->name ?? 'Unassigned' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                             @if($problem->status === 'open') bg-red-100 text-red-800

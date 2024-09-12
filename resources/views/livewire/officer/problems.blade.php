@@ -55,8 +55,8 @@ class extends Component {
                 @foreach (Auth::user()->problems as $problem)
                 <tr>
                     <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">{{ $problem->ticket }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->clientReported->name }}</td>
-                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->clientReported->department->name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->clientReported->name ?? '' }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->clientReported->department->name ?? '' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                             @if($problem->status === 'open') bg-red-100 text-red-800

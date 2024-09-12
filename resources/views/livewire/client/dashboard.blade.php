@@ -39,7 +39,7 @@ class extends Component  {
                 <h3 class="text-lg font-semibold text-gray-700">Resolved Problems</h3>
                 <i class="text-2xl text-green-500 fas fa-check-circle"></i>
             </div>
-            <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problemsReported->where('status', 'Resolved')->count() }}</p>
+            <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problemsReported->where('status', 'resolved')->count() }}</p>
             <p class="mt-2 text-sm text-gray-600">Issues resolved this month</p>
         </div>
 
@@ -51,7 +51,7 @@ class extends Component  {
             </div>
             <p class="text-3xl font-bold text-gray-800">{{
                 Auth::user()->problemsReported
-                ->where('status', 'Open')
+                ->where('status', 'open')
                 ->count()
             }}</p>
             <p class="mt-2 text-sm text-gray-600">Issues awaiting resolution</p>
@@ -83,7 +83,7 @@ class extends Component  {
                 <tr>
                     <td class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">#{{ $problem->ticket }}</td>
                     {{-- <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->description }}</td> --}}
-                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->assignedOfficer->name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $problem->assignedOfficer->name ?? 'Unassigned' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                             @if($problem->status === 'open') bg-red-100 text-red-800

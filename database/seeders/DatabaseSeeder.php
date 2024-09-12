@@ -8,7 +8,6 @@ use App\Models\Problem;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use ProblemSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Department::factory(8)->create();
+        $this->call(DepartmentsSeeder::class);
         User::factory(34)->create();
         Problem::factory(50)->create();
 

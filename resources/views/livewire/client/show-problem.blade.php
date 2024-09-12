@@ -57,23 +57,23 @@ class extends Component {
                     <dt class="text-sm font-medium text-gray-500">
                         Assigned Officer
                     </dt>
-                    <dd class="mt-1 text-sm font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $problem->assignedOfficer->name }}
+                    <dd class="mt-1 text-sm  text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ $problem->assignedOfficer->name ?? 'Unassigned' }}
                     </dd>
                 </div>
                 <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Assigned Officer Contact
                     </dt>
-                    <dd class="mt-1 text-sm font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $problem->assignedOfficer->email }}
+                    <dd class="mt-1 text-sm  text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{ $problem->assignedOfficer->email ?? '_' }}
                     </dd>
                 </div>
                 <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
                         Problem Description
                     </dt>
-                    <dd class="mt-1 text-sm font-semibold text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm  text-gray-900 sm:mt-0 sm:col-span-2">
                         {{ $problem->description }}
                     </dd>
                 </div>
@@ -81,7 +81,7 @@ class extends Component {
                     <dt class="text-sm font-medium text-gray-500">
                         Status
                     </dt>
-                    <dd class="mt-1 text-sm font-semibold text-gray-900 capitalize sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm  text-gray-900 capitalize sm:mt-0 sm:col-span-2">
                         {{ $problem->status }}
                     </dd>
                 </div>
@@ -90,7 +90,7 @@ class extends Component {
                     <dt class="text-sm font-medium text-gray-500">
                         Solution
                     </dt>
-                    <dd class="mt-1 text-sm font-semibold text-gray-900 capitalize sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm  text-gray-900 capitalize sm:mt-0 sm:col-span-2">
                         {{ $problem->solution }}
                     </dd>
                 </div>

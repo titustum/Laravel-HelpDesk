@@ -4,7 +4,6 @@ use Livewire\Volt\Component;
 use Livewire\Attributes\Layout;
 use App\Models\Problem;
 use App\Models\User;
-use Illuminate\Support\Str;
 
 new
 #[Layout('layouts.admin-layout')]
@@ -14,7 +13,7 @@ class extends Component {
 
     private function generateTicket()
     {
-        return "TKT-" . Str::upper(Str::random(8)) . '-' . rand(1000, 9999);
+        return "TKT-" . strtoupper(uniqid());
     }
 
     public function store()
@@ -27,9 +26,9 @@ class extends Component {
         $problem = Problem::create($validatedData + [
             'client_name' => Auth::user()->name,
             'client_email' => Auth::user()->email,
-            'created_by' => Auth::id(),
+            'created_by' => Auth::user()->id,
             'ticket' => $this->generateTicket(),
-            'assigned_to' => 1
+            'assigned_to' => null
         ]);
 
         $this->reset();

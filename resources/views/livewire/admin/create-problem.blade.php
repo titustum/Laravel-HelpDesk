@@ -14,7 +14,12 @@ class extends Component {
     public $client_email = '';
     public $description = '';
     public $assigned_to = '';
-    public $status = 'Open';
+    public $status = 'open';
+
+    private function generateTicket()
+    {
+        return "TKT-" . strtoupper(uniqid());
+    }
 
     public function mount() {
         $this->officers = User::where('role', 'officer')->get();
@@ -28,10 +33,10 @@ class extends Component {
             'client_email' => 'nullable|email|max:255',
             'description' => 'required|string',
             'assigned_to' => 'nullable|exists:users,id',
-            'status' => 'required|in:Open,In Progress,Resolved,Closed',
+            'status' => 'required|in:open,elevated,resolved,closed',
         ]);
 
-        $problem = Problem::create($validatedData + ['created_by' => auth()->id()]);
+        $problem = Problem::create($validatedData + ['created_by' => auth()->id(), 'ticket' => $this->generateTicket()]);
 
         $this->reset(['client_name', 'client_phone', 'client_email', 'description', 'assigned_to', 'status']);
 
@@ -97,10 +102,10 @@ class extends Component {
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                 <select wire:model="status" id="status"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option value="Open">Open</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Resolved">Resolved</option>
-                    <option value="Closed">Closed</option>
+                    <option value="open">Open</option>
+                    <option value="elevated">Elevated</option>
+                    <option value="resolved">Resolved</option>
+                    <option value="closed">Closed</option>
                 </select>
                 @error('status') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>

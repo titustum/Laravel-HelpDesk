@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ticket')->unique();
             $table->text('description');
             $table->enum('status', ['open', 'resolved', 'elevated', 'closed'])->default('open');
-            $table->foreignId('assigned_to')->constrained('users')->nullable()->onDelete('set null');;
+            $table->foreignId('assigned_to')->nullable()->onDelete('set null');;
             $table->foreignId('created_by')->constrained('users')->onDelete('cascade');;
             $table->text('solution')->nullable();
             $table->timestamp('resolved_at')->nullable();
