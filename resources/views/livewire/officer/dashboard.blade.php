@@ -20,13 +20,13 @@ class extends Component  {
 }; ?>
 
 <section class="p-6 bg-gray-100">
-    <h2 class="mb-6 text-2xl font-semibold text-gray-800">Officer Dashboard</h2>
+    <h2 class="mb-6 text-2xl font-semibold text-gray-800">ICT Officer Dashboard</h2>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- Assigned Problems Card -->
         <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Assigned Problems</h3>
+                <h3 class="text-lg font-semibold text-gray-700">Assigned Tasks</h3>
                 <i class="text-2xl text-blue-500 fas fa-tasks"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problems->count() }}</p>
@@ -36,7 +36,7 @@ class extends Component  {
         <!-- Resolved Problems Card -->
         <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Resolved Problems</h3>
+                <h3 class="text-lg font-semibold text-gray-700">Resolved Tasks</h3>
                 <i class="text-2xl text-green-500 fas fa-check-circle"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problems->where('status', 'resolved')->count() }}</p>
@@ -46,7 +46,7 @@ class extends Component  {
         <!-- Pending Problems Card -->
         <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Pending Problems</h3>
+                <h3 class="text-lg font-semibold text-gray-700">Pending Tasks</h3>
                 <i class="text-2xl text-yellow-500 fas fa-clock"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{
@@ -61,7 +61,7 @@ class extends Component  {
     <!-- Recent Assigned Problems Table -->
     <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
         <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-700">Recent Assigned Problems</h3>
+            <h3 class="text-lg font-semibold text-gray-700">Recent Assigned Tasks</h3>
         </div>
         <table class="w-full">
             <thead>

@@ -18,7 +18,7 @@ class extends Component  {
 }; ?>
 
 <div class="p-4 mt-8 overflow-hidden bg-white rounded-lg shadow">
-    <h2 class="mb-4 text-2xl font-semibold">Officers</h2>
+    <h2 class="mb-4 text-2xl font-semibold">ICT Officers</h2>
 
     @if (session()->has('message'))
     <div class="p-3 mb-4 text-green-600 bg-green-200 rounded-md">
@@ -31,7 +31,7 @@ class extends Component  {
             <input wire:model.debounce.300ms="search" type="text" placeholder="Search problems..."
                    class="px-4 py-2 border rounded-lg">
         </div>
-        <a href="{{ route('admin.problems.create') }}"
+        <a href="#"
            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
             Add New Officer
         </a>

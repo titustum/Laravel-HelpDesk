@@ -28,7 +28,7 @@ class extends Component {
 ?>
 
 <div>
-    <h2 class="mb-4 text-2xl font-semibold">Reported Problems</h2>
+    <h2 class="mb-4 text-2xl font-semibold">Reported Issues</h2>
 
     @if (session()->has('message'))
     <div class="p-3 mb-4 text-green-600 bg-green-200 rounded-md">
@@ -38,10 +38,10 @@ class extends Component {
 
     <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
         <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-700">Problems You Reported</h3>
+            <h3 class="text-lg font-semibold text-gray-700">Tasks You Reported</h3>
             <a href="{{ route('client.problems.create') }}"
             class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                Add New Problem
+                Report New Issue
             </a>
         </div>
         <table class="w-full">

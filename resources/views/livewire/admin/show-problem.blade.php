@@ -42,7 +42,7 @@ class extends Component {
 ?>
 
 <div class="py-8">
-    <h2 class="mb-6 text-2xl font-semibold">Problem Details</h2>
+    <h2 class="mb-6 text-2xl font-semibold">Task Details</h2>
 
     @if (session()->has('message'))
         <div class="relative px-4 py-3 mb-4 text-green-700 bg-green-100 border border-green-400 rounded" role="alert">
@@ -53,7 +53,7 @@ class extends Component {
     <div class="overflow-hidden bg-white shadow sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-                Problem : {{ $problem->ticket }}
+                Task : {{ $problem->ticket }}
             </h3>
             <p class="max-w-2xl mt-1 text-sm text-gray-500">
                 Created on {{ $problem->created_at->format('F j, Y, g:i a') }}
@@ -103,7 +103,7 @@ class extends Component {
                 </div>
                 <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-sm font-medium text-gray-500">
-                        Problem Description
+                        Task Description
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {{ $problem->description }}
@@ -148,7 +148,7 @@ class extends Component {
 
     <div class="mt-6">
         <button wire:click="updateProblem" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            Update Problem
+            Update Task
         </button>
     </div>
 </div>

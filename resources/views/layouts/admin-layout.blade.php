@@ -16,7 +16,7 @@
                 </li>
                 <li class="mb-2">
                     <a href="{{ route('client.problems') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
-                        <i class="mr-3 fas fa-clipboard-list"></i> Problems
+                        <i class="mr-3 fas fa-clipboard-list"></i> Tasks
                     </a>
                 </li>
 
@@ -29,7 +29,7 @@
                 </li>
                 <li class="mb-2">
                     <a href="{{ route('officer.problems') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
-                        <i class="mr-3 fas fa-clipboard-list"></i> My Problems
+                        <i class="mr-3 fas fa-clipboard-list"></i> My Tasks
                     </a>
                 </li>
 
@@ -41,7 +41,7 @@
                 </li>
                 <li class="mb-2">
                     <a href="{{ route('admin.problems.index') }}" class="flex items-center px-6 py-2 text-white hover:bg-indigo-700">
-                        <i class="mr-3 fas fa-clipboard-list"></i> Problems
+                        <i class="mr-3 fas fa-clipboard-list"></i> Tasks
                     </a>
                 </li>
                 <li class="mb-2">

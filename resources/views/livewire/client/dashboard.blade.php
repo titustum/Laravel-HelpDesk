@@ -20,13 +20,13 @@ class extends Component  {
 }; ?>
 
 <section class="p-6 bg-gray-100">
-    <h2 class="mb-6 text-2xl font-semibold text-gray-800">Client Dashboard</h2>
+    <h2 class="mb-6 text-2xl font-semibold text-gray-800">Staff Dashboard</h2>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <!-- Assigned Problems Card -->
         <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Reported Problems</h3>
+                <h3 class="text-lg font-semibold text-gray-700">Reported Issues</h3>
                 <i class="text-2xl text-blue-500 fas fa-tasks"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problemsReported->count() }}</p>
@@ -36,7 +36,7 @@ class extends Component  {
         <!-- Resolved Problems Card -->
         <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Resolved Problems</h3>
+                <h3 class="text-lg font-semibold text-gray-700">Resolved Issues</h3>
                 <i class="text-2xl text-green-500 fas fa-check-circle"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{ Auth::user()->problemsReported->where('status', 'resolved')->count() }}</p>
@@ -46,7 +46,7 @@ class extends Component  {
         <!-- Pending Problems Card -->
         <div class="p-6 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Pending Problems</h3>
+                <h3 class="text-lg font-semibold text-gray-700">Pending Issues</h3>
                 <i class="text-2xl text-yellow-500 fas fa-clock"></i>
             </div>
             <p class="text-3xl font-bold text-gray-800">{{
@@ -61,10 +61,10 @@ class extends Component  {
     <!-- Recent Assigned Problems Table -->
     <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
         <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-700">Recently Reported Problems</h3>
+            <h3 class="text-lg font-semibold text-gray-700">Recently Reported Issues</h3>
             <a href="{{ route('client.problems.create') }}"
             class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                Add New Problem
+                Report New Issue
             </a>
         </div>
         <table class="w-full">

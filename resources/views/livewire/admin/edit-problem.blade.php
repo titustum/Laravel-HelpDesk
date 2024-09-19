@@ -69,7 +69,7 @@ class extends Component
 
 
 <div class="max-w-4xl mx-auto py-8">
-    <h2 class="text-2xl font-semibold mb-6">Edit Problem</h2>
+    <h2 class="text-2xl font-semibold mb-6">Edit Task</h2>
 
     @if (session()->has('message'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -101,7 +101,7 @@ class extends Component
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
-                Problem Description
+                Description
             </label>
             <textarea wire:model="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" placeholder="Problem Description"></textarea>
             @error('description') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
@@ -139,7 +139,7 @@ class extends Component
         </div>
         <div class="flex items-center justify-between">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                Update Problem
+                Update Task
             </button>
         </div>
     </form>

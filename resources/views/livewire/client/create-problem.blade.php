@@ -41,7 +41,7 @@ class extends Component {
 ?>
 
 <section class="p-6 bg-white rounded-lg shadow-md">
-    <h2 class="mb-4 text-2xl font-bold">Add New Problem</h2>
+    <h2 class="mb-4 text-2xl font-bold">Add New Issue</h2>
 
     <form wire:submit="store">
         <div class="grid grid-cols-1 gap-4 ">
@@ -57,7 +57,7 @@ class extends Component {
 
             <!-- Problem Description -->
             <div class="md:col-span-2">
-                <label for="description" class="block text-sm font-medium text-gray-700">Problem Description</label>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                 <textarea wire:model="description" id="description" rows="4" required
                     class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                 @error('description') <span class="text-xs text-red-500">{{ $message }}</span> @enderror

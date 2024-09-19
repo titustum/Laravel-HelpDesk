@@ -28,7 +28,7 @@ class extends Component {
 ?>
 
 <div>
-    <h2 class="mb-4 text-2xl font-semibold">Problems</h2>
+    <h2 class="mb-4 text-2xl font-semibold">Tasks</h2>
 
     @if (session()->has('message'))
     <div class="p-3 mb-4 text-green-600 bg-green-200 rounded-md">
@@ -38,7 +38,7 @@ class extends Component {
 
     <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
         <div class="px-6 py-4 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-700">Your Assigned Problems</h3>
+            <h3 class="text-lg font-semibold text-gray-700">Your Assigned Tasks</h3>
         </div>
         <table class="w-full">
             <thead>

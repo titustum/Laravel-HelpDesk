@@ -35,7 +35,7 @@ class extends Component {
         <!-- Total Problems Card -->
         <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold">Total Problems</h3>
+                <h3 class="text-lg font-semibold">Total Tasks</h3>
                 <i class="text-2xl text-blue-500 fas fa-clipboard-list"></i>
             </div>
             <p class="mt-2 text-3xl font-bold">{{ $totalProblems }}</p>
@@ -44,7 +44,7 @@ class extends Component {
         <!-- Assigned Problems Card -->
         <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold">Assigned Problems</h3>
+                <h3 class="text-lg font-semibold">Assigned Tasks</h3>
                 <i class="text-2xl text-green-500 fas fa-tasks"></i>
             </div>
             <p class="mt-2 text-3xl font-bold">{{ $assignedProblems }}</p>
@@ -53,7 +53,7 @@ class extends Component {
         <!-- Unassigned Problems Card -->
         <div class="p-4 bg-white rounded-lg shadow">
             <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold">Unassigned Problems</h3>
+                <h3 class="text-lg font-semibold">Unassigned Tasks</h3>
                 <i class="text-2xl text-red-500 fas fa-exclamation-circle"></i>
             </div>
             <p class="mt-2 text-3xl font-bold">{{ $unassignedProblems }}</p>
@@ -71,7 +71,7 @@ class extends Component {
 
     <!-- Recent Problems Table -->
     <div class="mt-8 overflow-hidden bg-white rounded-lg shadow">
-        <h3 class="p-4 text-lg font-semibold bg-gray-200">Recent Problems</h3>
+        <h3 class="p-4 text-lg font-semibold bg-gray-200">Recent Tasks</h3>
         <table class="w-full">
             <thead>
                 <tr class="bg-gray-100">

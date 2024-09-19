@@ -45,7 +45,7 @@ class extends Component
 
 <div class="p-4 mt-8 overflow-hidden bg-white rounded-lg shadow">
 
-    <h2 class="mb-4 text-2xl font-semibold">Problems</h2>
+    <h2 class="mb-4 text-2xl font-semibold">Tasks</h2>
 
     @if (session()->has('message'))
     <div class="p-3 mb-4 text-green-600 bg-green-200 rounded-md">
@@ -60,7 +60,7 @@ class extends Component
         </div>
         <a href="{{ route('admin.problems.create') }}"
            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-            Add New Problem
+            Add New Task
         </a>
     </div>
 
